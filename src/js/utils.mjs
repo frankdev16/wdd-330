@@ -105,18 +105,29 @@ export async function loadHeaderFooter() {
   }
 }
 
+  export function formDataToJSON(formData) {
+  return Array.from(formData.entries()).reduce((obj, [key, value]) => {
+    obj[key] = value;
+    return obj;
+  }, {});
+}
+
 export function alertMessage(message, scroll = true) {
   const alert = document.createElement("div");
   alert.classList.add("alert");
-  alert.innerHTML = `<p>${message}</p><span>X</span>`;
-  
-  alert.addEventListener("click", function (e) {
-    if (e.target.tagName === "SPAN") {
-      main.removeChild(this);
-    }
-  });
-  
+  alert.innerHTML = `
+    <p>${message}</p>
+    <span class="alert-close">&times;</span>
+  `;
+
   const main = document.querySelector("main");
   main.prepend(alert);
-  if (scroll) window.scrollTo(0, 0);
+
+  alert.querySelector(".alert-close").addEventListener("click", () => {
+    alert.remove();
+  });
+
+  if (scroll) {
+    window.scrollTo(0, 0);
+  }
 }
