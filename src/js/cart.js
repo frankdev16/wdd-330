@@ -97,6 +97,10 @@ function attachQuantityListeners() {
   });
 }
 
+document.querySelector(".checkout-btn").addEventListener("click", () => {
+  window.location.href = "/checkout/index.html";
+});
+
 renderCartContents();
 
 loadHeaderFooter();

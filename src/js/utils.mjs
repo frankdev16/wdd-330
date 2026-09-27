@@ -101,3 +101,10 @@ export async function loadHeaderFooter() {
     console.error("loadHeaderFooter failed:", err);
   }
 }
+
+  export function formDataToJSON(formData) {
+  return Array.from(formData.entries()).reduce((obj, [key, value]) => {
+    obj[key] = value;
+    return obj;
+  }, {});
+}
