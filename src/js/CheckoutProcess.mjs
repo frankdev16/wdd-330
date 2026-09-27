@@ -62,14 +62,29 @@ async checkout(form) {
   const formData = new FormData(form);
   const orderData = formDataToJSON(formData);
 
+    for (const key in orderData) {
+    if (typeof orderData[key] === "string") {
+      orderData[key] = orderData[key].trim();
+    }
+  }
+
   orderData.orderDate = new Date().toISOString();
   orderData.orderTotal = this.orderTotal.toFixed(2); // string
   orderData.tax = this.tax.toFixed(2);               // string
   orderData.shipping = this.shipping;                // number
   orderData.items = this.packageItems(this.list);
 
-  const services = new ExternalServices();
-  return services.checkout(orderData);
+
+  try {
+    const services = new ExternalServices();
+    const response = await services.checkout(orderData);
+    return response;
+  } catch (err) {
+    console.error("Checkout error:", err);
+    throw err; // let checkout.js decide how to show this to the user
+  }
+  
+
 }
 
 }

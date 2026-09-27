@@ -434,6 +434,24 @@ form{
   }
 }
 
+.alert {
+  position: relative;
+  background: #fdecea;
+  border: 1px solid var(--tertiary-color);
+  color: var(--tertiary-color);
+  padding: 12px 36px 12px 16px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+
+  & .alert-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

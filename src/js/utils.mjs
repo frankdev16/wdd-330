@@ -108,3 +108,23 @@ export async function loadHeaderFooter() {
     return obj;
   }, {});
 }
+
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `
+    <p>${message}</p>
+    <span class="alert-close">&times;</span>
+  `;
+
+  const main = document.querySelector("main");
+  main.prepend(alert);
+
+  alert.querySelector(".alert-close").addEventListener("click", () => {
+    alert.remove();
+  });
+
+  if (scroll) {
+    window.scrollTo(0, 0);
+  }
+}

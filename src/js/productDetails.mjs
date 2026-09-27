@@ -1,3 +1,5 @@
+import { alertMessage } from "./utils.mjs";
+
 function convertToJson(res) {
   if (res.ok) {
     return res.json();
@@ -29,6 +31,7 @@ export default class ProductDetails {
     cartItems.push(this.product);
     localStorage.setItem("so-cart", JSON.stringify(cartItems));
 
+    alertMessage(`${this.product.Name} was added to your cart.`, false);
   }
 
   renderProductDetails() {
