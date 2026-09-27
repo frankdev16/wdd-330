@@ -97,6 +97,9 @@ export async function loadHeaderFooter() {
 
     renderWithTemplate(headerTemplate, headerParent);
     renderWithTemplate(footerTemplate, footerParent);
+    
+    updateCartCount();
+    
   } catch (err) {
     console.error("loadHeaderFooter failed:", err);
   }
