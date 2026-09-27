@@ -1,5 +1,3 @@
-// Alert Class
-// Creates an alert message for products
 
 import ExternalServices from "./ExternalServices.mjs";
 
