@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage, updateCartCount, alertMessage } from "./utils.mjs";
+import { alertMessage } from "./utils.mjs";
 
 function convertToJson(res) {
   if (res.ok) {
@@ -32,15 +32,6 @@ export default class ProductDetails {
     localStorage.setItem("so-cart", JSON.stringify(cartItems));
 
     alertMessage(`${this.product.Name} was added to your cart.`, false);
-    updateCartCount();
-
-    const cartIcon = document.querySelector(".cart");
-    cartIcon.classList.add("cart-animate");
-    
-    setTimeout(() => {
-      cartIcon.classList.remove("cart-animate");
-    }, 500);
-
   }
 
   renderProductDetails() {
