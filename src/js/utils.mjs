@@ -97,9 +97,42 @@ export async function loadHeaderFooter() {
 
     renderWithTemplate(headerTemplate, headerParent);
     renderWithTemplate(footerTemplate, footerParent);
+
+    initRegisterModal();
   } catch (err) {
     console.error("loadHeaderFooter failed:", err);
   }
+}
+
+function initRegisterModal() {
+  const hasSeen = getLocalStorage("hasSeenRegisterModal");
+  if (hasSeen) return;
+
+  const overlay = document.getElementById("registerModal");
+  if (!overlay) return;
+
+  overlay.classList.remove("hide");
+
+  function dismiss() {
+    overlay.classList.add("hide");
+    setLocalStorage("hasSeenRegisterModal", true);
+  }
+
+  overlay.querySelector(".modal-close").addEventListener("click", dismiss);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) dismiss();
+  });
+
+  overlay.querySelector("#registerForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = e.target.email.value.trim();
+    const entries = getLocalStorage("giveaway-entries") || [];
+    entries.push({ email, date: new Date().toISOString() });
+    setLocalStorage("giveaway-entries", entries);
+
+    dismiss();
+    alertMessage("You're entered! Check your inbox for details.", false);
+  });
 }
 
   export function formDataToJSON(formData) {
