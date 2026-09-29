@@ -111,6 +111,19 @@ button {
   font-size: var(--large-font);
   cursor: pointer;
 }
+.product-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-actions button {
+  margin: 0 0 10px 0;
+}
+
+.product-actions button:last-child {
+  margin-bottom: 0;
+}
 
 .divider {
   border-bottom: 2px solid var(--primary-color);
@@ -550,6 +563,11 @@ footer {
 
 .signup {
   border-right: 2px solid black;
+}
+.product-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 @keyframes cartBounce {
