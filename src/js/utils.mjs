@@ -97,6 +97,8 @@ export async function loadHeaderFooter() {
 
     renderWithTemplate(headerTemplate, headerParent);
     renderWithTemplate(footerTemplate, footerParent);
+
+    initRegisterModal();
     
     updateCartCount();
     
@@ -105,18 +107,60 @@ export async function loadHeaderFooter() {
   }
 }
 
+function initRegisterModal() {
+  const hasSeen = getLocalStorage("hasSeenRegisterModal");
+  if (hasSeen) return;
+
+  const overlay = document.getElementById("registerModal");
+  if (!overlay) return;
+
+  overlay.classList.remove("hide");
+
+  function dismiss() {
+    overlay.classList.add("hide");
+    setLocalStorage("hasSeenRegisterModal", true);
+  }
+
+  overlay.querySelector(".modal-close").addEventListener("click", dismiss);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) dismiss();
+  });
+
+  overlay.querySelector("#registerForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = e.target.email.value.trim();
+    const entries = getLocalStorage("giveaway-entries") || [];
+    entries.push({ email, date: new Date().toISOString() });
+    setLocalStorage("giveaway-entries", entries);
+
+    dismiss();
+    alertMessage("You're entered! Check your inbox for details.", false);
+  });
+}
+
+  export function formDataToJSON(formData) {
+  return Array.from(formData.entries()).reduce((obj, [key, value]) => {
+    obj[key] = value;
+    return obj;
+  }, {});
+}
+
 export function alertMessage(message, scroll = true) {
   const alert = document.createElement("div");
   alert.classList.add("alert");
-  alert.innerHTML = `<p>${message}</p><span>X</span>`;
-  
-  alert.addEventListener("click", function (e) {
-    if (e.target.tagName === "SPAN") {
-      main.removeChild(this);
-    }
-  });
-  
+  alert.innerHTML = `
+    <p>${message}</p>
+    <span class="alert-close">&times;</span>
+  `;
+
   const main = document.querySelector("main");
   main.prepend(alert);
-  if (scroll) window.scrollTo(0, 0);
+
+  alert.querySelector(".alert-close").addEventListener("click", () => {
+    alert.remove();
+  });
+
+  if (scroll) {
+    window.scrollTo(0, 0);
+  }
 }

@@ -19,8 +19,10 @@ export default class ProductDetails {
       this.renderProductDetails();
 
       document.getElementById('addToCart')
-      .addEventListener('click', this.addProductToCart.bind(this));
+        .addEventListener('click', this.addProductToCart.bind(this));
 
+      document.getElementById('addToWishlist')
+        .addEventListener('click', this.addProductToWishlist.bind(this));
     });
   }
 
@@ -28,29 +30,56 @@ export default class ProductDetails {
     const cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
     cartItems.push(this.product);
     localStorage.setItem("so-cart", JSON.stringify(cartItems));
+  }
 
+  addProductToWishlist() {
+    const wishlistItems = JSON.parse(localStorage.getItem("so-wishlist")) || [];
+
+    const alreadySaved = wishlistItems.some(
+      (item) => item.Id === this.product.Id
+    );
+
+    if (!alreadySaved) {
+      wishlistItems.push(this.product);
+      localStorage.setItem("so-wishlist", JSON.stringify(wishlistItems));
+    }
   }
 
   renderProductDetails() {
+    const isDiscounted =
+      this.product.FinalPrice < this.product.SuggestedRetailPrice;
 
-    const isDiscounted = this.product.FinalPrice < this.product.SuggestedRetailPrice;
     const discountPercent = isDiscounted
-      ? Math.round(((this.product.SuggestedRetailPrice - this.product.FinalPrice) / this.product.SuggestedRetailPrice) * 100)
+      ? Math.round(
+          ((this.product.SuggestedRetailPrice - this.product.FinalPrice) /
+            this.product.SuggestedRetailPrice) *
+            100
+        )
       : 0;
 
     const productDetailsContainer = document.querySelector('.product-detail');
+
     productDetailsContainer.innerHTML = `
       <h3>${this.product.Brand.Name}</h3>
       <h2>${this.product.Name}</h2>
-      ${isDiscounted ? `<span class="discount-badge">${discountPercent}% OFF</span>` : ''}
+      ${
+        isDiscounted
+          ? `<span class="discount-badge">${discountPercent}% OFF</span>`
+          : ''
+      }
       <img src="${this.product.Images.PrimaryLarge}" alt="${this.product.Name}">
       <p>$${this.product.ListPrice}</p>
       <p>${this.product.Colors[0].ColorName}</p>
 
       <p>${this.product.DescriptionHtmlSimple}</p>
-      <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
+
+      <button id="addToCart" data-id="${this.product.Id}">
+        Add to Cart
+      </button>
+
+      <button id="addToWishlist" data-id="${this.product.Id}">
+        Add to Wishlist
+      </button>
     `;
   }
-
-
 }

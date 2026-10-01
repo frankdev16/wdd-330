@@ -1,6 +1,5 @@
 
-// import ProductData from "./ProductData.mjs";
-// import ExternalServices from "./ExternalServices.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 
 export default class Alert {
   constructor() {
