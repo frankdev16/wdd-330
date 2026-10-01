@@ -1,0 +1,97 @@
+:root {
+    --bg-asphalt: #2c3e50; 
+    --sidebar-bg: #34495e;
+    --btn-yellow: #f1c40f; 
+    --text-light: #ecf0f1;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: var(--bg-asphalt);
+    color: var(--text-light);
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Sidebar Layout */
+.sidebar {
+    background-color: var(--sidebar-bg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.route-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    background-color: var(--btn-yellow);
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s, opacity 0.2s; /* Advanced CSS requirement */
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: scale(1.02); /* Advanced CSS requirement */
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.filter-btn {
+    flex: 1;
+    border-radius: 20px;
+}
+
+/* Map Area */
+.map-area {
+    flex-grow: 1;
+    position: relative;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    min-height: 400px;
+    background-color: #e5e3df; /* Placeholder map color */
+}
+
+/* Desktop View */
+@media (min-width: 768px) {
+    .app-container {
+        flex-direction: row;
+    }
+    .sidebar {
+        width: 350px;
+        height: 100vh;
+        overflow-y: auto;
+    }
+}

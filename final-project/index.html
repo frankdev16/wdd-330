@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekend Route Planner | Port Harcourt</title>
+
+  <meta name="description" content="Plan stress-free weekend driving practice routes around Port Harcourt.">
+  <meta name="author" content="Franklin Anyaogu">
+
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="Weekend Route Planner | Port Harcourt">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wdd-330-route-planner.onrender.com/">
+  <meta property="og:image" content="/images/route-planner-hero.webp">
+  <meta property="og:description" content="Plan stress-free weekend driving practice routes around Port Harcourt.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@300;400;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Leaflet.js CSS for the Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Your Custom CSS -->
+  <link rel="stylesheet" href="src/styles/style.css" />
+
+  <!-- Leaflet.js Map Script -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+  <!-- Your Main JavaScript Module -->
+  <script type="module" src="src/scripts/main.js"></script>
+</head>
+
+<body>
+  <header id="main-header"></header>
+
+  <div class="app-container">
+    <!-- Left Sidebar Control Panel -->
+    <aside class="sidebar">
+      <div class="route-inputs">
+        <label for="start">Start Location:</label>
+        <input type="text" id="start" placeholder="e.g. Trans-Amadi, Port Harcourt">
+
+        <label for="stop">Destination:</label>
+        <input type="text" id="stop" placeholder="Where to?">
+
+        <button id="find-location-btn">Use My Current Location</button>
+      </div>
+
+      <div class="saved-routes">
+        <h3>SAVED PRACTICE ROUTES</h3>
+        <ul id="saved-list">
+          <!-- JavaScript will inject saved routes here -->
+        </ul>
+      </div>
+
+      <div class="filter-buttons">
+        <button class="filter-btn" data-category="gas">⛽ GAS</button>
+        <button class="filter-btn" data-category="parks">🌳 PARKS</button>
+        <button class="filter-btn" data-category="rest">☕ REST</button>
+      </div>
+    </aside>
+
+    <!-- Right Side Map Area -->
+    <main class="map-area">
+      <div id="map"></div>
+    </main>
+  </div>
+
+  <footer id="main-footer"></footer>
+
+</body>
+
+</html>
