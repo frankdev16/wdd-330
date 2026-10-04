@@ -52,12 +52,12 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    transition: transform 0.2s, opacity 0.2s; /* Advanced CSS requirement */
+    transition: transform 0.2s, opacity 0.2s; 
 }
 
 button:hover {
     opacity: 0.9;
-    transform: scale(1.02); /* Advanced CSS requirement */
+    transform: scale(1.02); 
 }
 
 .filter-buttons {
@@ -81,7 +81,7 @@ button:hover {
     height: 100%;
     width: 100%;
     min-height: 400px;
-    background-color: #e5e3df; /* Placeholder map color */
+    background-color: #e5e3df;
 }
 
 /* Desktop View */
@@ -90,7 +90,7 @@ button:hover {
         flex-direction: row;
     }
     .sidebar {
-        width: 350px;
+        width: 25rem;
         height: 100vh;
         overflow-y: auto;
     }
