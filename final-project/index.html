@@ -25,11 +25,15 @@
 
   <!-- Leaflet.js CSS for the Map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
   <link rel="stylesheet" href="src/styles/style.css" />
-
-  <!-- Leaflet.js Map Script -->
+  <!-- Leaflet Routing Machine CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+  
+  <!-- 1. Leaflet.js Map Script MUST load first -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <!-- 2. Leaflet Routing Machine Script loads second -->
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     
   <script type="module" src="src/scripts/main.js"></script>
 </head>
