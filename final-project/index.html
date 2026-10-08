@@ -44,12 +44,18 @@
   <div class="app-container">
     <aside class="sidebar">
       <div class="route-inputs">
-        <label for="start">Start Location:</label>
-        <input type="text" id="start" placeholder="e.g. Trans-Amadi, Port Harcourt">
-
-        <label for="stop">Destination:</label>
-        <input type="text" id="stop" placeholder="Where to?">
-
+        <div class="input-group">
+          <label for="start">Start Location:</label>
+          <input type="text" id="start" placeholder="e.g. Trans-Amadi, Port Harcourt" autocomplete="off">
+          <div id="start-suggestions" class="suggestions-list"></div>
+        </div>
+      
+        <div class="input-group">
+          <label for="stop">Destination:</label>
+          <input type="text" id="stop" placeholder="Where to?" autocomplete="off">
+          <div id="stop-suggestions" class="suggestions-list"></div>
+        </div>
+      
         <button id="find-location-btn">Use My Current Location</button>
       </div>
 

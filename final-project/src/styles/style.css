@@ -3,6 +3,10 @@
     --sidebar-bg: #34495e;
     --btn-yellow: #f1c40f; 
     --text-light: #ecf0f1;
+    --text-dark: #333333;
+    --bg-light: #ffffff;
+    --border-light: #eeeeee;
+    --hover-light: #f1f1f1;
 }
 
 * {
@@ -38,10 +42,19 @@ body {
     gap: 10px;
 }
 
+/* Input Grouping for Dropdown Positioning */
+.input-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 input {
     padding: 10px;
     border-radius: 5px;
     border: none;
+    color: var(--text-dark);
 }
 
 button {
@@ -82,6 +95,40 @@ button:hover {
     width: 100%;
     min-height: 400px;
     background-color: #e5e3df;
+}
+
+/* Autocomplete Dropdown Styles */
+.suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-light);
+    border-radius: 5px;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    margin-top: 5px;
+    list-style: none;
+}
+
+.suggestion-item {
+    padding: 12px;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.9rem;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background-color: var(--hover-light);
+    color: #000;
 }
 
 /* Desktop View */
