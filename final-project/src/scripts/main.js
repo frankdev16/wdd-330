@@ -1,4 +1,5 @@
 import MapController from './MapController.mjs';
+import { saveRouteToStorage, getSavedRoutes } from './utils.mjs';
 
 const myMap = new MapController('map');
 const routeInputsContainer = document.querySelector('.route-inputs');
@@ -23,9 +24,27 @@ locationBtn.addEventListener('click', async () => {
 });
 
 // To handle "Plan Route"
+// planRouteBtn.addEventListener('click', () => {
+//     if (currentStartCoords && currentDestCoords) {
+//         myMap.calculateRoute(currentStartCoords, currentDestCoords);
+//     } else {
+//         alert("Please ensure you have selected both a valid Start and Destination location.");
+//     }
+// });
+
 planRouteBtn.addEventListener('click', () => {
     if (currentStartCoords && currentDestCoords) {
+        // Draw the line on the map
         myMap.calculateRoute(currentStartCoords, currentDestCoords);
+        
+        // Get the actual text the user typed/selected
+        const startName = document.getElementById('start').value;
+        const destName = document.getElementById('stop').value;
+
+        saveRouteToStorage(startName, destName, currentStartCoords, currentDestCoords);
+        
+        // Refresh the sidebar list to show the new route immediately
+        displaySavedRoutes();
     } else {
         alert("Please ensure you have selected both a valid Start and Destination location.");
     }
@@ -63,8 +82,7 @@ function setupAutocomplete(inputId, suggestionsBoxId) {
 
                     if (!isNaN(lat) && !isNaN(lon)) {
                         myMap.map.setView([lat, lon], 15);
-                        
-                        // Save the coordinates to our state variables so the route planner can use them
+                     
                         if (inputId === 'start') {
                             currentStartCoords = [lat, lon];
                         } else if (inputId === 'stop') {
@@ -80,3 +98,23 @@ function setupAutocomplete(inputId, suggestionsBoxId) {
 
 setupAutocomplete('start', 'start-suggestions');
 setupAutocomplete('stop', 'stop-suggestions');
+
+function displaySavedRoutes() {
+    const savedListContainer = document.getElementById('saved-list');
+    const routes = getSavedRoutes();
+    
+    savedListContainer.innerHTML = '';
+
+    routes.forEach(route => {
+        const li = document.createElement('li');
+        li.style.padding = '10px';
+        li.style.borderBottom = '1px solid #ccc';
+        li.style.listStyle = 'none';
+  
+        li.innerHTML = `<strong>From:</strong> ${route.startLocationName} <br> <strong>To:</strong> ${route.destinationName}`;
+        
+        savedListContainer.appendChild(li);
+    });
+}
+
+displaySavedRoutes();
